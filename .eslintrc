@@ -1,0 +1,7 @@
+{
+  "extends": "@antfu",
+  "rules": {
+    "no-console": 1,
+    "prefer-regex-literals":0
+  }
+}
