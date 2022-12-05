@@ -1,6 +1,6 @@
 {
   "name": "gentemp",
-  "version": "0.0.1-alpha-init",
+  "version": "0.0.2-alpha-init.0",
   "description": "",
   "main": "index.js",
   "bin": {
@@ -8,12 +8,20 @@
   },
   "scripts": {
     "build": "tsup",
-    "dev": "tsx src/index.ts"
+    "dev": "tsx src/index.ts",
+    "prepublishOnly": "pnpm run build",
+    "release": "bumpp && npm publish",
+    "typecheck": "tsc --noEmit"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "bumpp": "^8.2.1",
+    "chalk": "^5.1.2",
+    "consola": "^2.15.3",
+    "execa": "^6.1.0",
+    "prompts": "^2.4.2",
     "tsup": "^6.5.0",
     "tsx": "^3.12.1",
     "typescript": "^4.9.3"
