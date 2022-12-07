@@ -23,12 +23,17 @@ const choose = async (): Promise<{ projectName: string; template: string }> => {
     name: 'template',
     message: 'template:',
     choices: [
-      { title: 'Vanilla', value: 'Vanilla', description: 'Without any web framework & For npm package' },
+      {
+        title: 'Vanilla',
+        value: 'Vanilla',
+        description: 'Without any web framework & For npm package',
+      },
     ],
     initial: 0,
   })
   return {
-    projectName, template,
+    projectName,
+    template,
   }
 }
 
@@ -37,8 +42,7 @@ const check = async (targetDir: string): Promise<Boolean> => {
 
   const isPathExist = await pathExists(targetDir)
 
-  if (!isPathExist)
-    return true
+  if (!isPathExist) return true
 
   const files = await readdir(targetDir)
 
@@ -49,8 +53,7 @@ const check = async (targetDir: string): Promise<Boolean> => {
       message: 'The target folder is not empty, Do you want to empty it ?',
     })
 
-    if (!confirm)
-      return false
+    if (!confirm) return false
     emptyDir(targetDir)
     return true
   }
@@ -79,9 +82,12 @@ const replaceJson = (id: string, replaceOption: { projectName: string }) => {
 const handlePkgJson = async (targetDir: string, projectName: string): Promise<void> => {
   const filePath = resolve(targetDir, './package.json')
 
-  writeFile(filePath, replaceJson(await readFile(filePath, 'utf-8'), {
-    projectName,
-  }))
+  writeFile(
+    filePath,
+    replaceJson(await readFile(filePath, 'utf-8'), {
+      projectName,
+    }),
+  )
 }
 
 const run = async () => {
@@ -93,8 +99,7 @@ const run = async () => {
 
   const isEmpty = await check(targetDir)
 
-  if (!isEmpty)
-    return consola.error(chalk.red('The target folder is not empty, Fail to generate'))
+  if (!isEmpty) return consola.error(chalk.red('The target folder is not empty, Fail to generate'))
 
   await generate(targetDir, template)
 

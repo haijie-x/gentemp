@@ -1,7 +1,10 @@
 {
-  "extends": "@antfu",
+  "extends": [
+    "@antfu",
+    "plugin:prettier/recommended"
+  ],
   "rules": {
     "no-console": 1,
-    "prefer-regex-literals":0
+    "prefer-regex-literals": 0
   }
 }
